@@ -12,17 +12,17 @@ knitr::opts_chunk$set(echo = TRUE)
 ## make a simple regression model
 
 ```{r}
-bears <- read.csv(file="BEARS.csv",header = TRUE)
+BEARS <- read.csv(file="BEARS.csv",header = TRUE)
 #adjust factors to be factors
-bears$SEX<- as.factor(bears$SEX)
-bears$MONTH<- as.factor(bears$MONTH)
+BEARS$SEX<- as.factor(BEARS$SEX)
+BEARS$MONTH<- as.factor(BEARS$MONTH)
 ```
 
 ## Model LENGTH ~ NECK  this is an example  
 
 ```{r}
-simp <- lm(LENGTH~NECK,data=bears)
-plot(LENGTH~NECK,data=bears)
+simp <- lm(LENGTH~NECK,data=BEARS)
+plot(LENGTH~NECK,data=BEARS)
 abline(simp)
 summary.lm(simp)
 ```
@@ -36,4 +36,81 @@ predict(simp,new)
 predict(simp,new,se.fit=TRUE)
 ```
 ## Surely there is another variable that can better predict LENGTH than NECK. Find one and compare its performance to that of neck by it value of Adjusted-Rsquared (bigger is better).
+
+```{r}
+simp2 <- lm(LENGTH~HEADWTH,data=BEARS)
+plot(LENGTH~HEADWTH,data=BEARS)
+abline(simp2)
+summary.lm(simp2)
+  
+```
+
+The adjusted R-squared is 0.53, which is smaller than using the 'neck'.
+
+```{r}
+simp3 <- lm(LENGTH~WEIGHT,data=BEARS)
+plot(LENGTH~WEIGHT,data=BEARS)
+abline(simp3)
+summary.lm(simp3)
+  
+```
+ 
+The adjusted R-squared is 0.74, which is about the same as the 'neck'.
+
+```{r}
+simp4 <- lm(LENGTH~CHEST,data=BEARS)
+plot(LENGTH~CHEST,data=BEARS)
+abline(simp4)
+summary.lm(simp4)
+  
+```
+
+The adjusted R-squared is 0.78, which is bigger than the 'neck'.
+
+```{r}
+simp5 <- lm(LENGTH~HEADLEN,data=BEARS)
+plot(LENGTH~HEADLEN,data=BEARS)
+abline(simp5)
+summary.lm(simp5)
+  
+```
+
+
+The adjusted R-squared is 0.84 for HEADLEN, which is bigger than the 'neck' and 'chest'.  
+
+
+```{r}
+simp6 <- lm(LENGTH~as.numeric(SEX),data=BEARS)
+plot(LENGTH~as.numeric(SEX),data=BEARS)
+abline(simp6)
+summary.lm(simp6)
+  
+```
+This suggested R-squared is too small to be considered for 'sex' of the bear.  
+
+```{r}
+simp7 <- lm(LENGTH~as.numeric(MONTH),data=BEARS)
+plot(LENGTH~as.numeric(MONTH),data=BEARS)
+abline(simp7)
+summary.lm(simp7)
+  
+```
+This suggested R-squared is too small to be considered for 'month'.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
