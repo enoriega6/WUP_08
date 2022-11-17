@@ -98,19 +98,14 @@ summary.lm(simp7)
 This suggested R-squared is too small to be considered for 'month'.
 
 
+```{r}
+simp8 <- lm(LENGTH~AGE,data=BEARS)
+plot(LENGTH~AGE,data=BEARS)
+abline(simp8)
+summary.lm(simp8)
+```
+The adjusted R-squared is 0.51 for AGE, which is smaller than the 'neck' and 'chest'. 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+In conclusion, the 'HEADLEN' variable has the highest adjusted R_square which was 0.84, this variable can better predict LENGTH of the bear than the other variables in the model 'LENGTH' and 'NECK.'
 
 
